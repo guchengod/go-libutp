@@ -1,11 +1,6 @@
-package utp
+package purego
 
 import "log/slog"
-
-const (
-	logCallbacks = false
-	utpLogging   = false
-)
 
 // Logger is the logger a Socket is given when [NewSocket] isn't passed [WithLogger]. When it's
 // nil, which is the default, a Socket uses slog.Default() as it stands when the Socket is created.
@@ -17,4 +12,17 @@ func defaultLogger() *slog.Logger {
 		return Logger
 	}
 	return slog.Default()
+}
+
+// The name a category goes out under in a log record.
+func (me logLevel) String() string {
+	switch me {
+	case logNormal:
+		return "normal"
+	case logMTU:
+		return "mtu"
+	case logDebug:
+		return "debug"
+	}
+	return "unknown"
 }
